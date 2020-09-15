@@ -50,7 +50,7 @@ from numpy import nan, array, square, sqrt
 from re import findall
 # used for calculating statistics
 from scipy.stats import f
-from scipy.stats import median_absolute_deviation
+from scipy.stats import median_abs_deviation
 # used for ransac linear regression
 from sklearn import linear_model
 # used for plotting
@@ -560,7 +560,7 @@ def main(input_file, output_folder, reference, num_init, mod_cutoff, create_plot
     # calculate MAD per sample
     dataframe_raw_scores.drop("Slope", axis=1, inplace=True)
     dataframe_raw_scores_T = dataframe_raw_scores.T
-    mad = median_absolute_deviation(dataframe_raw_scores_T, scale=1)
+    mad = median_abs_deviation(dataframe_raw_scores_T, scale=1, axis=0, nan_policy='omit')
     median = dataframe_raw_scores_T.median(axis=0)
 
     # calculate cutoff value for each time point (> 3*MAD)
